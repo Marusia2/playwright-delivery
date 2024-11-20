@@ -26,7 +26,6 @@ test('Check for incorrect credentials message and close pop up message', async (
   console.log('Random password is: ', faker.internet.password())
 });
 
-
 test('Check for error messages for login input', async ({ page }) => {
   const usernameField = page.getByTestId("username-input")
   const passwordField = page.getByTestId("password-input")
@@ -36,15 +35,20 @@ test('Check for error messages for login input', async ({ page }) => {
   const emptyErrorMessageForShortUserName = page.getByText('The field must contain at least of characters: 2')
   const emptyErrorMessageForShortPassword = page.getByText('The field must contain at least of characters: 8')
 
-  await usernameField.fill("t")
-  await expect(emptyErrorMessageForShortUserName).toBeVisible()
+  await usernameField.fill(faker.internet.username().substring(0, 1)); // Short username
+  await expect(emptyErrorMessageForShortUserName).toBeVisible();
 
-  await usernameField.fill("")
-  await expect(emptyErrorMessageForUserName).toBeVisible()
+  await usernameField.fill("");
+  await expect(emptyErrorMessageForUserName).toBeVisible();
 
-  await passwordField.fill("test")
-  await expect(emptyErrorMessageForShortPassword).toBeVisible()
+  await passwordField.fill(faker.internet.password().substring(0, 7)); // Short password
+  await expect(emptyErrorMessageForShortPassword).toBeVisible();
 
-  await passwordField.fill("")
-  await expect(emptyErrorMessageForPassword).toBeVisible()
+  await passwordField.fill("");
+  await expect(emptyErrorMessageForPassword).toBeVisible();
+  console.log('Random username for negative scenario is: ', faker.internet.username().substring(0, 1))
+  console.log('Random password for negative scenario is: ', faker.internet.password().substring(0, 7))
 });
+
+
+
