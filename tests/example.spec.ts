@@ -3,9 +3,9 @@ import { faker } from '@faker-js/faker';
 
 // 16 assignment. Tests were rewritten using randomly generated usernames and passwords created by the Faker application.
 // modified run configurations
-const baseURL = process.env.APP_URL || 'https://fe-delivery.tallinn-learning.ee/signin'
+const URL = process.env.APP_URL || ' ' //https://fe-delivery.tallinn-learning.ee/signin'
 test.beforeEach(async ({ page }) => {
-  await page.goto(baseURL);
+  await page.goto(URL);
 });
 
 test('Check for incorrect credentials message and close pop up message', async ({ page }) => {
